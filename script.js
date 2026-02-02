@@ -1,7 +1,7 @@
 const noBtn = document.getElementById("noBtn");
 
-// Set a proximity distance (in pixels) that defines "close" to the button
-const proximityDistance = 30; // 30px distance from the center of the button to trigger movement
+// Set a proximity distance to trigger movement (in pixels)
+const proximityDistance = 30; // 30px from the center of the button to trigger movement
 
 // Set the maximum movement radius (in pixels)
 const moveRadius = 700; // Max 700px move distance in any direction
@@ -13,11 +13,10 @@ function moveButtonRandomly() {
     noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`; // Apply the movement to the button
 }
 
-// Check if the mouse is within the proximity of the "No" button
-noBtn.addEventListener("mouseenter", () => {
-    noBtn.style.transition = "transform 0.3s ease-out"; // Add smooth transition when button moves
-});
+// Track if the button has already moved
+let hasMoved = false;
 
+// Check if the mouse is within the proximity of the "No" button
 noBtn.addEventListener("mousemove", (event) => {
     const rect = noBtn.getBoundingClientRect();
     const mouseX = event.clientX;
@@ -28,14 +27,9 @@ noBtn.addEventListener("mousemove", (event) => {
         Math.pow(mouseX - (rect.left + rect.width / 2), 2) + Math.pow(mouseY - (rect.top + rect.height / 2), 2)
     );
 
-    // If the cursor is within the proximity distance, move the button
-    if (distance < proximityDistance) {
+    // If the cursor is within the proximity distance and the button hasn't already moved, move the button
+    if (distance < proximityDistance && !hasMoved) {
         moveButtonRandomly(); // Trigger movement only if near
+        hasMoved = true; // Prevent further movement
     }
-});
-
-// Ensure the button doesn't move randomly if the cursor isn't near
-noBtn.addEventListener("mouseleave", () => {
-    noBtn.style.transition = "transform 0.3s ease-out"; // Ensure smooth transition back to the original position
-    noBtn.style.transform = "translate(0, 0)"; // Reset the button to its original position
 });
