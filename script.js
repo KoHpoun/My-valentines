@@ -1,17 +1,16 @@
 const noBtn = document.getElementById("noBtn");
 
-// Set a distance for when the mouse is "near" the button
-const proximityDistance = 30; // 100px from the button edge
+// Set a proximity distance to trigger movement (in pixels)
+const proximityDistance = 30; // 30px from the button edge
 
-// Function to randomly move the button by a small distance
+// Set the maximum distance the button can move when the mouse is close
+const moveRadius = 700; // 700px radius for button movement
+
+// Function to randomly move the button within a radius
 function moveButtonRandomly() {
-    const moveDistance = 700;
-    const randomDirection = Math.random() < 0.5 ? -1 : 1;
-
-    const moveX = Math.random() * moveDistance * randomDirection;
-    const moveY = Math.random() * moveDistance * randomDirection;
-
-    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    const moveX = (Math.random() - 0.5) * moveRadius * 2; // random move in X direction
+    const moveY = (Math.random() - 0.5) * moveRadius * 2; // random move in Y direction
+    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`; // Apply the move to the button
 }
 
 // Check if the cursor is within the proximity of the No button
@@ -20,14 +19,13 @@ noBtn.addEventListener("mousemove", (event) => {
     const mouseX = event.clientX;
     const mouseY = event.clientY;
 
-    // Calculate the distance between the mouse and the button
+    // Calculate the distance from the cursor to the center of the button
     const distance = Math.sqrt(
         Math.pow(mouseX - (rect.left + rect.width / 2), 2) + Math.pow(mouseY - (rect.top + rect.height / 2), 2)
     );
 
-    // If the cursor is within the proximity distance, move the button
+    // If the mouse is within the proximity, move the button
     if (distance < proximityDistance) {
-        moveButtonRandomly();
+        moveButtonRandomly(); // Move the button randomly within the radius
     }
 });
-
