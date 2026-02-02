@@ -1,0 +1,114 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8e1e1;
+    color: #fff;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    color: #ff4f81;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#yesBtn {
+    background-color: #ff7a7a;
+    color: white;
+}
+
+#yesBtn:hover {
+    background-color: #ff4f81;
+}
+
+#noBtn {
+    background-color: #a1a1a1;
+    color: white;
+}
+
+#noBtn:hover {
+    background-color: #555;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Add to your existing styles.css or update it */
+/* Ensure images are on the left and right, with text in the center */
+.container {
+    display: flex;
+    justify-content: center; /* Center all content horizontally */
+    align-items: center;     /* Align content vertically */
+    flex-direction: row;     /* Arrange items in a row */
+    text-align: center;      /* Center the text */
+    padding: 20px;
+    gap: 20px;               /* Space between text and images */
+}
+
+h1 {
+    font-size: 2em;
+    color: #ff4f81;
+    margin-bottom: 20px;
+    max-width: 300px;        /* Limit width of the text container */
+}
+
+p {
+    font-size: 1.2em;
+    color: #fff;
+    margin-bottom: 20px;
+    max-width: 300px;        /* Limit width of the paragraph container */
+}
+
+/* Position the images */
+.gallery {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery img {
+    width: 100%;            /* Images take up full width of their container */
+    max-width: 300px;       /* Maximum size for images */
+    height: auto;           /* Maintain aspect ratio */
+    margin: 10px 0;         /* Space between images */
+    border-radius: 10px;    /* Optional: rounded corners for images */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: soft shadow */
+}
