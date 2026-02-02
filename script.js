@@ -1,11 +1,11 @@
 const noBtn = document.getElementById("noBtn");
 
 // Set a distance for when the mouse is "near" the button
-const proximityDistance = 100; // 100px from the button edge
+const proximityDistance = 30; // 100px from the button edge
 
 // Function to randomly move the button by a small distance
 function moveButtonRandomly() {
-    const moveDistance = 10;
+    const moveDistance = 700;
     const randomDirection = Math.random() < 0.5 ? -1 : 1;
 
     const moveX = Math.random() * moveDistance * randomDirection;
@@ -30,3 +30,4 @@ noBtn.addEventListener("mousemove", (event) => {
         moveButtonRandomly();
     }
 });
+
