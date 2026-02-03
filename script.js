@@ -30,6 +30,7 @@ function moveButtonRandomly() {
     noBtn.style.position = "absolute"; // Ensure it's positioned freely
     noBtn.style.left = `${newLeft}px`;
     noBtn.style.top = `${newTop}px`;
+    console.log(`Button moved to: ${newLeft}px, ${newTop}px`); // Logging for debugging
 }
 
 // Flag to check if the button has already moved
@@ -63,7 +64,7 @@ noBtn.addEventListener("mousemove", (event) => {
         );
         
         // Reset movement flag if the mouse moves far enough from the button
-        if (moveAwayDistance > 20) { // Distance to reset movement
+        if (moveAwayDistance > 100) { // Distance to reset movement
             hasMoved = false;
         }
     }
