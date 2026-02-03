@@ -1,7 +1,7 @@
 const noBtn = document.getElementById("noBtn");
 
 // Constants for proximity and screen resolution
-const proximityDistance = 30; // Move when cursor is within 30px of the button
+const proximityDistance = 50; // Move when cursor is within 30px of the button
 const moveRadius = 700; // Maximum random movement distance in pixels
 const screenWidth = 1920;  // Full HD screen width (1920px)
 const screenHeight = 1080; // Full HD screen height (1080px)
@@ -40,3 +40,4 @@ noBtn.addEventListener("mousemove", (event) => {
         moveButtonRandomly();
     }
 });
+
