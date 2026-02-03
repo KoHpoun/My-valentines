@@ -6,25 +6,20 @@ const proximityDistance = 30; // 30px from the center of the button to trigger m
 // Set the maximum movement radius (in pixels)
 const moveRadius = 700; // Max 700px move distance in any direction
 
-// Track the current position of the button
-let currentX = 0;
-let currentY = 0;
-
 // Function to randomly move the button within a defined radius
 function moveButtonRandomly() {
     // Generate random movement within the defined radius
     const moveX = (Math.random() - 0.5) * moveRadius * 2; 
     const moveY = (Math.random() - 0.5) * moveRadius * 2; 
 
-    // Update the button's position by adjusting currentX and currentY
-    currentX += moveX;
-    currentY += moveY;
-
-    // Set the new position using absolute positioning
-    noBtn.style.position = "absolute";
-    noBtn.style.left = `${currentX}px`;
-    noBtn.style.top = `${currentY}px`;
+    // Update the button's position using absolute positioning
+    noBtn.style.position = "absolute"; // Ensure it's positioned freely
+    noBtn.style.left = `${moveX}px`;
+    noBtn.style.top = `${moveY}px`;
 }
+
+// Flag to check if the button has already moved
+let hasMoved = false;
 
 // Check if the mouse is within the proximity of the "No" button
 noBtn.addEventListener("mousemove", (event) => {
@@ -38,7 +33,13 @@ noBtn.addEventListener("mousemove", (event) => {
     );
 
     // If the cursor is within the proximity distance, move the button, but only if it hasn't already moved
-    if (distance < proximityDistance) {
-        moveButtonRandomly(); // Move the button only if near
+    if (distance < proximityDistance && !hasMoved) {
+        moveButtonRandomly(); // Trigger movement only if near
+        hasMoved = true; // Set the flag to prevent further movement until reset
     }
 });
+
+// Reset the button's ability to move if necessary (e.g., after a timeout, or on another event)
+function resetMovement() {
+    hasMoved = false; // Allow the button to move again
+}
