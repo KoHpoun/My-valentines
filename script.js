@@ -16,14 +16,20 @@ function moveButtonRandomly() {
     const moveX = (Math.random() - 0.5) * moveRadius * 2; 
     const moveY = (Math.random() - 0.5) * moveRadius * 2; 
 
-    // Ensure the button stays within the bounds of the viewport
-    const maxLeft = Math.min(screenWidth - noBtn.offsetWidth, Math.max(0, moveX));
-    const maxTop = Math.min(screenHeight - noBtn.offsetHeight, Math.max(0, moveY));
+    // Calculate the new left and top positions
+    let newLeft = moveX;
+    let newTop = moveY;
 
-    // Update the button's position using absolute positioning
+    // Ensure the button stays within the bounds of the viewport
+    if (newLeft < 0) newLeft = 0; // Prevent moving off the left side
+    if (newTop < 0) newTop = 0; // Prevent moving off the top side
+    if (newLeft + noBtn.offsetWidth > screenWidth) newLeft = screenWidth - noBtn.offsetWidth; // Prevent moving off the right side
+    if (newTop + noBtn.offsetHeight > screenHeight) newTop = screenHeight - noBtn.offsetHeight; // Prevent moving off the bottom side
+
+    // Set the new position using absolute positioning
     noBtn.style.position = "absolute"; // Ensure it's positioned freely
-    noBtn.style.left = `${maxLeft}px`;
-    noBtn.style.top = `${maxTop}px`;
+    noBtn.style.left = `${newLeft}px`;
+    noBtn.style.top = `${newTop}px`;
 }
 
 // Flag to check if the button has already moved
