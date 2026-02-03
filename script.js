@@ -35,6 +35,10 @@ function moveButtonRandomly() {
 // Flag to check if the button has already moved
 let hasMoved = false;
 
+// Track mouse distance to reset movement
+let lastMouseX = -1;
+let lastMouseY = -1;
+
 // Check if the mouse is within the proximity of the "No" button
 noBtn.addEventListener("mousemove", (event) => {
     const rect = noBtn.getBoundingClientRect();
@@ -46,9 +50,25 @@ noBtn.addEventListener("mousemove", (event) => {
         Math.pow(mouseX - (rect.left + rect.width / 2), 2) + Math.pow(mouseY - (rect.top + rect.height / 2), 2)
     );
 
-    // If the cursor is within the proximity distance, move the button, but only if it hasn't already moved
+    // If the cursor is within the proximity distance and the button hasn't already moved, move the button
     if (distance < proximityDistance && !hasMoved) {
-        moveButtonRandomly(); // Trigger movement only if near
-        hasMoved = true; // Set the flag to prevent further movement until reset
+        moveButtonRandomly(); // Move the button
+        hasMoved = true; // Set flag so it doesn't move until cursor gets near again
     }
+
+    // Reset the "hasMoved" flag if the mouse moves far enough from the button
+    if (lastMouseX !== -1 && lastMouseY !== -1) {
+        const moveAwayDistance = Math.sqrt(
+            Math.pow(mouseX - lastMouseX, 2) + Math.pow(mouseY - lastMouseY, 2)
+        );
+        
+        // Reset movement flag if the mouse moves far enough from the button
+        if (moveAwayDistance > 20) { // Distance to reset movement
+            hasMoved = false;
+        }
+    }
+
+    // Update last mouse position for future distance calculations
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
 });
