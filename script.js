@@ -6,16 +6,24 @@ const proximityDistance = 30; // 30px from the center of the button to trigger m
 // Set the maximum movement radius (in pixels)
 const moveRadius = 700; // Max 700px move distance in any direction
 
+// Get the size of the viewport to limit movement to within the screen bounds
+const screenWidth = window.innerWidth;
+const screenHeight = window.innerHeight;
+
 // Function to randomly move the button within a defined radius
 function moveButtonRandomly() {
     // Generate random movement within the defined radius
     const moveX = (Math.random() - 0.5) * moveRadius * 2; 
     const moveY = (Math.random() - 0.5) * moveRadius * 2; 
 
+    // Ensure the button stays within the bounds of the viewport
+    const maxLeft = Math.min(screenWidth - noBtn.offsetWidth, Math.max(0, moveX));
+    const maxTop = Math.min(screenHeight - noBtn.offsetHeight, Math.max(0, moveY));
+
     // Update the button's position using absolute positioning
     noBtn.style.position = "absolute"; // Ensure it's positioned freely
-    noBtn.style.left = `${moveX}px`;
-    noBtn.style.top = `${moveY}px`;
+    noBtn.style.left = `${maxLeft}px`;
+    noBtn.style.top = `${maxTop}px`;
 }
 
 // Flag to check if the button has already moved
@@ -38,8 +46,3 @@ noBtn.addEventListener("mousemove", (event) => {
         hasMoved = true; // Set the flag to prevent further movement until reset
     }
 });
-
-// Reset the button's ability to move if necessary (e.g., after a timeout, or on another event)
-function resetMovement() {
-    hasMoved = false; // Allow the button to move again
-}
